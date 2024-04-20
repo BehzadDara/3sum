@@ -58,6 +58,10 @@ IList<IList<int>> ThreeSum(int[] nums)
 
     for (int i = 0; i < orderedNums.Count - 2; i++)
     {
+        if (i > 0 && orderedNums[i - 1] == orderedNums[i])
+        {
+            break;
+        }
         if (orderedNums[i] > 0)
         {
             break;
@@ -65,6 +69,11 @@ IList<IList<int>> ThreeSum(int[] nums)
 
         for (int j = i + 1;  j < orderedNums.Count - 1; j++)
         {
+            if (i != j - 1 && orderedNums[j - 1] == orderedNums[j]) 
+            {
+                break;
+            }
+
             if (orderedNums[i] + orderedNums[j] > 0) 
             {
                 break;
@@ -72,19 +81,21 @@ IList<IList<int>> ThreeSum(int[] nums)
 
             for(int k = j + 1; k < orderedNums.Count; k++)
             {
+                if (j != k - 1 && orderedNums[k - 1] == orderedNums[k])
+                {
+                    break;
+                }
+
                 var sum = orderedNums[i] + orderedNums[j] + orderedNums[k];
 
                 if (sum == 0)
                 {
-                    if (!IsDuplicate(result, orderedNums[i], orderedNums[j], orderedNums[k]))
-                    {
-                        result.Add(
-                        [
-                            orderedNums[i],
-                            orderedNums[j],
-                            orderedNums[k]
-                        ]);
-                    }
+                    result.Add(
+                    [
+                        orderedNums[i],
+                        orderedNums[j],
+                        orderedNums[k]
+                    ]);
                 }
 
                 else if (sum > 0)
@@ -96,18 +107,4 @@ IList<IList<int>> ThreeSum(int[] nums)
     }
 
     return result;
-}
-
-bool IsDuplicate(List<IList<int>> result, int number1, int number2, int number3)
-{
-    foreach (var item in result) 
-    {
-        if (item[0] == number1 &&
-            item[1] == number2 &&
-            item[2] == number3)
-        {
-            return true;
-        }
-    }
-    return false;
 }
