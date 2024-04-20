@@ -100,7 +100,7 @@ IList<IList<int>> ThreeSum(int[] nums)
 
 bool IsDuplicate(List<IList<int>> result, int number1, int number2, int number3)
 {
-    foreach (var item in result)
+    foreach (var item in result) 
     {
         if (item[0] == number1 &&
             item[1] == number2 &&
